@@ -6,6 +6,8 @@
   --clr-dark-shade: #111111;
   --clr-dark-tint: #222222;
   --clr-body-bg: var(--clr-light);
+  --photos-grid-columns: 1;
+  --photos-grid-rows: 4;
 }
 
 * {
@@ -29,6 +31,7 @@ body {
   width: 80%;
   max-width: 1150px;
   margin: 0 auto;
+  padding: 2rem 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -40,13 +43,59 @@ body {
           align-items: center;
 }
 
-.photo {
+.photos {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[var];
+      grid-template-columns: repeat(var(--photos-grid-columns), 1fr);
+  -ms-grid-rows: (1fr)[var];
+      grid-template-rows: repeat(var(--photos-grid-rows), 1fr);
+  gap: 2rem;
+  place-items: center;
+}
+
+.photos .photo {
   -webkit-transform: perspective(2000px);
           transform: perspective(2000px);
   width: 80%;
-  max-width: 600px;
+  max-width: 800px;
   -webkit-box-shadow: 0 7px 14px 0 rgba(0, 0, 0, 0.4);
           box-shadow: 0 7px 14px 0 rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease;
+}
+
+@media screen and (min-width: 768px) {
+  :root {
+    --photos-grid-columns: 2;
+    --photos-grid-rows: 3;
+  }
+  .photos {
+        grid-template-areas: 'image1 image2' 'image3 image2' 'image3 image4';
+  }
+  .photos .photo:nth-child(1) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    grid-area: image1;
+  }
+  .photos .photo:nth-child(2) {
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 2;
+    -ms-grid-column: 2;
+    grid-area: image2;
+  }
+  .photos .photo:nth-child(3) {
+    -ms-grid-row: 2;
+    -ms-grid-row-span: 2;
+    -ms-grid-column: 1;
+    grid-area: image3;
+  }
+  .photos .photo:nth-child(4) {
+    -ms-grid-row: 3;
+    -ms-grid-column: 2;
+    grid-area: image4;
+  }
 }
 
 @media (prefers-color-scheme: dark) {

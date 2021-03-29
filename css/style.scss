@@ -6,6 +6,8 @@
    --clr-dark-shade: #111111;
    --clr-dark-tint: #222222;
    --clr-body-bg: var(--clr-light);
+   --photos-grid-columns: 1;
+   --photos-grid-rows: 4;
 }
 
 @mixin flex-center{
@@ -34,16 +36,53 @@ body{
    width: 80%;
    max-width: 1150px;
    margin: 0 auto;
+   padding: 2rem 0;
 
    @include flex-center;
 }
 
-.photo{
-   transform: perspective(2000px);
-   width: 80%;
-   max-width: 600px;
-   box-shadow: 0 7px 14px 0 rgba(black, .4);
+.photos{
+   display: grid;
+   grid-template-columns: repeat(var(--photos-grid-columns), 1fr);
+   grid-template-rows: repeat(var(--photos-grid-rows), 1fr);
+   gap: 2rem;
+   place-items: center;
+
+   .photo{
+      transform: perspective(2000px);
+      width: 80%;
+      max-width: 800px;
+      box-shadow: 0 7px 14px 0 rgba(black, .4);
+      border-radius: 10px;
+      transition: all .3s ease;
+   }
 }
+
+@media screen and (min-width: 768px){
+   :root{
+      --photos-grid-columns: 2;
+      --photos-grid-rows: 3;
+   }
+
+   .photos{
+      grid-template-areas: 
+         'image1 image2'
+         'image3 image2'
+         'image3 image4';
+
+      .photo{
+         &:nth-child(1){ grid-area: image1;}
+
+         &:nth-child(2){ grid-area: image2; }
+         
+         &:nth-child(3){ grid-area: image3; }
+         
+         &:nth-child(4){ grid-area: image4;}
+      }
+   }
+}
+
+@media screen and (min-width: 1024px){ }
 
 @media (prefers-color-scheme: dark){
    :root{
