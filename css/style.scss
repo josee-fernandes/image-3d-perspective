@@ -1,0 +1,52 @@
+:root{   
+   --clr-light: #e1e1e1;
+   --clr-light-shade: #dbdbdb;
+   --clr-light-tint: white;
+   --clr-dark: #1b1b1b;
+   --clr-dark-shade: #111111;
+   --clr-dark-tint: #222222;
+   --clr-body-bg: var(--clr-light);
+}
+
+@mixin flex-center{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+*{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+html, body{
+   width: 100vw;
+   min-height: 100vh;
+}
+
+body{
+   overflow-x: hidden;
+   background-color: var(--clr-body-bg);
+}
+
+.container{
+   width: 80%;
+   max-width: 1150px;
+   margin: 0 auto;
+
+   @include flex-center;
+}
+
+.photo{
+   transform: perspective(2000px);
+   width: 80%;
+   max-width: 600px;
+   box-shadow: 0 7px 14px 0 rgba(black, .4);
+}
+
+@media (prefers-color-scheme: dark){
+   :root{
+      --clr-body-bg: var(--clr-dark);
+   }
+}
